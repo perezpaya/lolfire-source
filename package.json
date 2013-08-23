@@ -1,0 +1,14 @@
+{
+  "name": "lolfire",
+  "version": "0.0.1",
+  "description": "Graphs for League of Legends",
+  "dependencies": {
+    "express": "*",
+    "ejs": "*",
+    "mariasql": "*",
+    "async": "*",
+    "mixpanel": "*",
+    "redis": "*",
+    "hiredis": "*"
+  }
+}

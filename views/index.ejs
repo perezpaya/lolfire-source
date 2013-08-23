@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to LoLFire</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="League of Legends Stats. League of Legends REST API">
+    <meta name="author" content="Alejandro Perezpaya">
+    <meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="../../../../js/bootstrap.js"></script>
+	<link href="../../../../css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+	<% include nav.ejs %>
+
+	<div class="container">
+	
+		<h1>Webapp coming soon :P</h1>
+		<h4>We have developed our own League of Legends API, it is open and RESTful. Its now up and running!</h4>
+		<p>Check our API Docs and create your own app :P with our REST JSON API: <a href="https://github.com/alexperezpaya/lolfire-api">https://github.com/alexperezpaya/lolfire-api</a> We are adding more regions some days. Stay tunned!<p>
+
+		<ul class="list-group">
+
+		<% regions.forEach(function (region){ %>
+			<li class="list-group-item">
+			<%= full[region] %>
+				<% if((online.indexOf(region)+1) === 0){ %>
+					
+					<span class="label label-danger pull-right">
+						Offline
+					</span>
+
+				<% } else{ %>
+					<span class="label label-success pull-right">
+						Online
+					</span>
+				<% } %>
+
+			</li>
+
+		<% }) %>
+		
+		</ul>
+
+	</div>
+
+	<% include footer.ejs %>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= name%> - LoLFire</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="League of Legends Stats">
+    <meta name="author" content="Alejandro Perezpaya">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="../../../../js/bootstrap.js"></script>
+	<script src="../../../../js/highcharts.js"></script>
+	<script src="../../../../js/modules/exporting.js"></script>
+    
+	<% var series = []; %>
+
+	<% function pu(a){if(typeof a == 'undefined'){return 0;} else{return a;}} %>
+
+	<% for(var i in Object.keys(stats)){ %>
+		<% var foo = {} %>
+		<% foo.name = Object.keys(stats)[i] %>
+		<% foo.data = [] %>
+		<% foo.data.push(pu(stats[Object.keys(stats)[i]].wins)) %>
+		<% foo.data.push(pu(stats[Object.keys(stats)[i]].stats.champion_kills)) %>
+		<% foo.data.push(pu(stats[Object.keys(stats)[i]].stats.neutral_minions)) %>
+		<% foo.data.push(pu(stats[Object.keys(stats)[i]].stats.turret_kills)) %>
+		<% series.push(foo) %>
+	<% } %>
+
+	<% series = JSON.stringify({data: series}); %>
+
+    <script type="text/javascript">
+
+	    $(function () {
+
+	    	$('#table').hide();
+
+	        $('#graphs').highcharts({
+				chart: {
+		            type: 'bar'
+		        }, title:{
+		        	text: 'Match Statistics'
+		        }, xAxis: {
+	            	categories: ['Wins', 'Champions Kills', 'Minions', 'Turret Kills']
+		        }, yAxis: {
+                	min: 0
+            	}, series: JSON.parse('<%- series %>').data
+            });
+	    });
+
+	    var switchGraph = function (){
+	    	$('#table_pill').removeClass('active');
+	    	$('#table').hide();
+	    	$('#graph_pill').addClass('active');
+	    	$('#graphs').show();
+	    };
+
+	   	var switchTable = function (){
+			$('#table_pill').addClass('active');
+	    	$('#table').show();
+	    	$('#graph_pill').removeClass('active');
+	    	$('#graphs').hide();
+	    };
+
+    </script>
+    <!-- Le styles -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+
+</head>
+
+<body>
+
+	<% include nav.ejs %>
+
+	<div id="container">
+      	
+      	<img class="summoner_icon img-responsive" src="../../../../icons/<%= summoner.object.profileIconId %>.png" alt="Summoner image">	    
+	    
+	    <div class="summoner_description">
+			<h2><%= name %></h2>
+			<h5><i class="icon-map-marker"></i> <%= region %></h5>
+			<p>Level <%= summoner.object.summonerLevel.value %></p>
+			<div class="center_pills">			
+				<ul class="nav nav-pills">
+				  <li class="active" id="graph_pill"><a href="javascript:switchGraph()">Graph</a></li>
+				  <li id="table_pill"><a href="javascript:switchTable()">Table</a></li>
+				</ul>
+			</div>
+		
+		</div>
+		
+
+		<div id="graphs">
+			
+		</div>
+		
+		<div id="table">
+			<table class="table table-hover table-condensed table-striped table-bordered">
+                <thead>
+                        <tr>
+                                <th>Game</th>
+                                <th>Champions Kills</th>
+                                <th>Minions Farmed</th>
+                                <th>Neutral Minions</th>
+                                <th>Wins</th>
+                        </tr>
+                </thead>
+
+                <tbody>
+
+                        <% for(var i in Object.keys(stats)){ %>
+                                <tr>
+                                        <td><%= Object.keys(stats)[i] %></td>
+                                        <td><%= pu(stats[Object.keys(stats)[i]].stats.champion_kills) %></td>
+                                        <td><%= pu(stats[Object.keys(stats)[i]].stats.neutral_minions) %></td>
+                                        <td><%= pu(stats[Object.keys(stats)[i]].stats.turret_kills) %></td>
+                                        <td><%= pu(stats[Object.keys(stats)[i]].wins) %></td>
+                                </tr>
+                        <% } %>
+
+                </tbody>
+            </table>
+		</div>
+
+	</div>
+
+	<% include footer.ejs %>
+
+</body>
+</html>

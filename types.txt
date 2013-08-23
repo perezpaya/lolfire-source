@@ -1,0 +1,40 @@
+CoopVsAI
+AramUnranked6x6
+CoopVsAI3x3
+OdinUnranked
+AramUnranked1x1
+AramUnranked2x2
+CAP5x5
+CAP1x1
+AramUnranked3x3
+AramUnranked5x5
+Unranked
+Unranked3x3
+
+
+// User is ranked:
+
+AramUnranked6x6
+CAP1x1
+AramUnranked2x2
+AramUnranked1x1
+- RankedTeam3x3
+- RankedSolo5x5
+- Unranked3x3
+CoopVsAI3x3
+CAP5x5
+CoopVsAI
+- Unranked
+OdinUnranked
+AramUnranked3x3
+- AramUnranked5x5
+- RankedTeam5x5
+
+
+// Types of stats
+
+TOTAL_NEUTRAL_MINIONS_KILLED
+TOTAL_TURRETS_KILLED
+TOTAL_MINION_KILLS
+TOTAL_CHAMPION_KILLS
+TOTAL_ASSISTS
