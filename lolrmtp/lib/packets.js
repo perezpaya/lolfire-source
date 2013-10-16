@@ -657,6 +657,8 @@
 
   exports.LookupPacket = LookupPacket;
 
+  exports.SummonerNamesPacket = SummonerNamesPacket;
+
   exports.GetSummonerDataPacket = GetSummonerDataPacket;
 
   exports.AggregatedStatsPacket = AggregatedStatsPacket;
