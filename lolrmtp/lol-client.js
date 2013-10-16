@@ -252,6 +252,26 @@
       });
     };
 
+    LolClient.prototype.getSummonerNames = function(accIds, cb) {
+      var SummonerNamesPacket, cmd,
+        _this = this;
+      if (this.options.debug) {
+        console.log("Finding player name from accIds: ", accIds);
+      }
+      SummonerNamesPacket = lolPackets.SummonerNamesPacket;
+      cmd = new RTMPCommand(0x11, null, null, null, [new SummonerNamesPacket(this.options).generate(accIds)]);
+      return this.rtmp.send(cmd, function(err, result) {
+        var _ref, _ref1;
+        if (err) {
+          return cb(err);
+        }
+        if ((result != null ? (_ref = result.args) != null ? (_ref1 = _ref[0]) != null ? _ref1.body : void 0 : void 0 : void 0) == null) {
+          return cb(err, null);
+        }
+        return cb(err, result.args[0].body);
+      });
+    };
+
     LolClient.prototype.getSummonerStats = function(acctId, cb) {
       var PlayerStatsPacket, cmd,
         _this = this;
