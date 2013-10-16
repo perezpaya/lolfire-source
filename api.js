@@ -46,6 +46,22 @@
 
   };
 
+  api.summonerNames = function (req, res, next){
+    var ids = req.params.ids.trim().split(',').map(function (a) {return parseInt(a, 10);});
+    connections[req.params.region].getSummonerNames(ids, function(err, result) {
+      if(err){
+        res.send({err: err});
+        trackErr(err);
+      } else{
+        res.send(result || {});
+      }
+
+      next();
+
+    });
+
+  };
+
   api.stats = function (req, res, next){
 
     connections[req.params.region].getSummonerStats(req.params.id, function(err, result) {
