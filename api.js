@@ -157,7 +157,20 @@
       }
     });
 
+  };
 
-  }
+  api.leagues = function (req, res, next){
+      
+    var client = connections[req.params.region];
+
+    client.getAllLeaguesForPlayer(req.params.id, function(err, result) {
+      if(err){
+        res.send({err: err});
+      } else{
+        res.send(result || {});
+      }
+    });
+
+  };
 
   module.exports = api;

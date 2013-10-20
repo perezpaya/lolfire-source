@@ -397,6 +397,23 @@
       });
     };
 
+    LolClient.prototype.getAllLeaguesForPlayer = function(summonerId, cb) {
+      var GetAllLeaguesForPlayer, cmd,
+        _this = this;
+      GetAllLeaguesForPlayer = lolPackets.GetAllLeaguesForPlayer;
+      cmd = new RTMPCommand(0x11, null, null, null, [new GetAllLeaguesForPlayer(this.options).generate(summonerId)]);
+      return this.rtmp.send(cmd, function(err, result) {
+        var _ref, _ref1;
+        if (err) {
+          return cb(err);
+        }
+        if (!(result != null ? (_ref = result.args) != null ? (_ref1 = _ref[0]) != null ? _ref1.body : void 0 : void 0 : void 0)) {
+          return cb(err, null);
+        }
+        return cb(err, result.args[0].body);
+      });
+    };
+
     return LolClient;
 
   })(EventEmitter);

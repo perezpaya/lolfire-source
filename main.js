@@ -89,6 +89,7 @@
   app.get('/api/v1/:region/teamdata/:id', regionCheckerApi, api.teamInfo, trackApiRequest);
   app.get('/api/v1/:region/active/:name', regionCheckerApi, api.activeMatch, trackApiRequest);
   app.get('/api/v1/:region/summonerNames/:ids', regionCheckerApi, api.summonerNames, trackApiRequest);
+  app.get('/api/v1/:region/leagues/:id', regionCheckerApi, api.leagues, trackApiRequest);
 
 
   // WEBAPP
