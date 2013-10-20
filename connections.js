@@ -21,9 +21,9 @@ var lolrmtp = require('./lolrmtp/main').client;
       username: 'lolfireeune',
       password: 'password',
       version: '3.10.13_07_26_19_59'
-    }
+    }*/
 
-  };*/
+  };
 
 
 // Connects to each region in regions and handles reconnection
