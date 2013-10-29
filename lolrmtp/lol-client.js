@@ -138,7 +138,7 @@
       if (this.options.debug) {
         console.log('Connecting to SSL');
       }
-      stream = tls.connect(this.options.port, this.options.host, function() {
+      stream = tls.connect(this.options.port, this.options.host, {rejectUnauthorized: false}, function (){
         return cb(null, stream);
       });
       return stream.on('error', function() {
